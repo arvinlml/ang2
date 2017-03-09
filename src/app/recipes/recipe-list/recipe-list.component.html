@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-xs-12">
+    <a class="btn btn-success">New Recipe</a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <ul class="list-group">
+      <tcw2-recipe-item [recipe]="recipe" (click)="onSelected(recipe)"></tcw2-recipe-item>
+    </ul>
+  </div>
+</div>
+
