@@ -1,22 +1,22 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Recipe } from '../recipe'
-import {JQueryStyleEventEmitter} from "rxjs/observable/FromEventObservable";
+import { Recipe } from '../recipe';
+import { RecipeService } from '../recipe.service';
 @Component({
-  selector: 'tcw2-recipe-list',
-  templateUrl: './recipe-list.component.html',
-  styles: []
+    selector: 'tcw2-recipe-list',
+    templateUrl: './recipe-list.component.html',
+    styles: []
 })
 export class RecipeListComponent implements OnInit {
-  recipies : Recipe[]=[];
+    recipes: Recipe[] = [];
 
-  @Output()
-  recipeSelected = new EventEmitter<Recipe>()
-  recipe = new Recipe('Dummy','dummy','https://suples.com/dummies/greco/slide1.jpg')
-  onSelected(recipe:Recipe){
-    console.log('Selected recipe object: ' + recipe);
-    this.recipeSelected.emit(recipe);
-  }
-  constructor() { }
-  ngOnInit() {
-  }
+    @Output() recipeSelected = new EventEmitter<Recipe>();
+
+    constructor(private recipeService: RecipeService) {
+        this.recipes = recipeService.getRecipes();
+    }
+    ngOnInit() {
+    }
+    onSelected(recipe: Recipe) {
+        this.recipeSelected.emit(recipe);
+    }
 }
