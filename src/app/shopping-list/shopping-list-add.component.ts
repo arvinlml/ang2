@@ -15,7 +15,12 @@ export class ShoppingListAddComponent implements OnChanges {
   }
 
   ngOnChanges(changes){
-    this.bAdd = changes.item.currentValue === null;
+    if (changes.item.currentValue === null) {
+      this.bAdd = true;
+      this.item = {name: null, quantity:null};
+    }
+    else
+      this.bAdd=false;
   }
 
   onSubmit(ingredient: Ingredient) {
