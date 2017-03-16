@@ -6,10 +6,17 @@ import { Ingredient } from '../shared/ingredient';
     templateUrl: './shopping-list.component.html'
 })
 export class ShoppingListComponent implements OnInit {
-    items: Ingredient[] = [];
-    constructor(private sls: ShoppingListService) { }
+  items: Ingredient[] = [];
+  selectedItem: Ingredient = null;
 
-    ngOnInit() {
-        this.items = this.sls.getItems();
-    }
+  constructor(private sls: ShoppingListService) {
+  }
+
+  ngOnInit() {
+    this.items = this.sls.getItems();
+  }
+
+  onSelectItem(item: Ingredient) {
+    this.selectedItem = item;
+  }
 }

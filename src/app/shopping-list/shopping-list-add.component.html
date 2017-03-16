@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <form id="shopping-list-add">
+    <form id="shopping-list-add" (ngSubmit)="onSubmit(f.value)" #f="ngForm">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="item-name">Name</label>
@@ -8,23 +8,29 @@
             type="text"
             id="item-name"
             required
-            class="form-control">
+            class="form-control"
+          [ngModel]="item.name"
+          name="name">
         </div>
 
         <div class="col-sm-2 form-group">
-          <label for="item-amount">Amount</label>
+          <label for="item-quantity">Quantity</label>
           <input
             type="text"
-            id="item-amount"
+            id="item-quantity"
             required
-            class="form-control">
+            class="form-control"
+          [(ngModel)]="item.quantity"
+          name="quantity">
         </div>
       </div>
+      {{ item | json }}
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit">Add</button>
-          <button class="btn btn-danger" type="button">Delete Item</button>
-          <button class="btn btn-primary" type="button">Clear</button>
+          <button class="btn btn-success" type="submit" *ngIf="bAdd" [disabled]="!f.valid">Add</button>
+          <button class="btn btn-success" type="submit" *ngIf="!bAdd" [disabled]="!f.valid">Save</button>
+          <button class="btn btn-danger" type="button" *ngIf="!bAdd">Delete Item</button>
+          <button class="btn btn-primary" type="button" *ngIf="!bAdd">Clear</button>
         </div>
       </div>
     </form>
