@@ -1,26 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Recipe } from './recipe'; 
+import {Recipe} from './recipe';
 import { Ingredient } from '../shared/ingredient';
 
 @Injectable()
 export class RecipeService {
-    private recipes: Recipe[] = [
-        new Recipe('One', 'two', 'https://cdn.pixabay.com/photo/2016/02/01/16/10/eye-1173863__340.jpg', [
-            new Ingredient('French fries', 2),
-            new Ingredient('Pork meat', 1)
-        ]),
-        new Recipe('three', 'four', 'https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634_960_720.png', [])
-    ];
+  private recipes: Recipe[] = [
+    new Recipe('One', 'two', 'https://cdn.pixabay.com/photo/2016/02/01/16/10/eye-1173863__340.jpg', [
+      new Ingredient('French fries', 2),
+      new Ingredient('Pork meat', 1)
+    ]),
+    new Recipe('three', 'four', 'https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634_960_720.png', [])
+  ];
 
-    constructor() { }
-    getRecipes() {
-        return this.recipes;
-    }
-    getRecipe(id: number) {
-        return this.recipes[id];
-    }
+  constructor() {
+  }
 
-    deleteRecipe(recipe: Recipe) {
-        this.recipes.splice(this.recipes.lastIndexOf(recipe), 1);
-    }
+  getRecipes() {
+    return this.recipes;
+  }
+
+  getRecipe(id: number) {
+    return this.recipes[id];
+  }
+
+  deleteRecipe(recipe: Recipe) {
+    this.recipes.splice(this.recipes.lastIndexOf(recipe), 1);
+  }
+
+  addRecipe(newRecipe: Recipe) {
+    this.recipes.push(newRecipe);
+  }
+
+  editRecipe(oldRecipe: Recipe, changedRecipe: Recipe) {
+    this.recipes[this.recipes.indexOf(oldRecipe)] = changedRecipe;
+  }
 }
